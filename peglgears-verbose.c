@@ -200,9 +200,9 @@ static GLint gear1, gear2, gear3;
 static GLfloat angle = 0.0;
 
 #if 0
-static GLfloat eyesep = 5.0;		/* Eye separation. */
-static GLfloat fix_point = 40.0;	/* Fixation point distance.  */
-static GLfloat left, right, asp;	/* Stereo frustum params.  */
+static GLfloat eyesep = 5.0;      /* Eye separation. */
+static GLfloat fix_point = 40.0;   /* Fixation point distance.  */
+static GLfloat left, right, asp;   /* Stereo frustum params.  */
 #endif
 
 
@@ -243,9 +243,9 @@ gear(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
       glVertex3f(r0 * cos(angle), r0 * sin(angle), width * 0.5);
       glVertex3f(r1 * cos(angle), r1 * sin(angle), width * 0.5);
       if (i < teeth) {
-	 glVertex3f(r0 * cos(angle), r0 * sin(angle), width * 0.5);
-	 glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
-		    width * 0.5);
+    glVertex3f(r0 * cos(angle), r0 * sin(angle), width * 0.5);
+    glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
+          width * 0.5);
       }
    }
    glEnd();
@@ -259,9 +259,9 @@ gear(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
       glVertex3f(r1 * cos(angle), r1 * sin(angle), width * 0.5);
       glVertex3f(r2 * cos(angle + da), r2 * sin(angle + da), width * 0.5);
       glVertex3f(r2 * cos(angle + 2 * da), r2 * sin(angle + 2 * da),
-		 width * 0.5);
+       width * 0.5);
       glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
-		 width * 0.5);
+       width * 0.5);
    }
    glEnd();
 
@@ -274,9 +274,9 @@ gear(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
       glVertex3f(r1 * cos(angle), r1 * sin(angle), -width * 0.5);
       glVertex3f(r0 * cos(angle), r0 * sin(angle), -width * 0.5);
       if (i < teeth) {
-	 glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
-		    -width * 0.5);
-	 glVertex3f(r0 * cos(angle), r0 * sin(angle), -width * 0.5);
+    glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
+          -width * 0.5);
+    glVertex3f(r0 * cos(angle), r0 * sin(angle), -width * 0.5);
       }
    }
    glEnd();
@@ -288,9 +288,9 @@ gear(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
       angle = i * 2.0 * M_PI / teeth;
 
       glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
-		 -width * 0.5);
+       -width * 0.5);
       glVertex3f(r2 * cos(angle + 2 * da), r2 * sin(angle + 2 * da),
-		 -width * 0.5);
+       -width * 0.5);
       glVertex3f(r2 * cos(angle + da), r2 * sin(angle + da), -width * 0.5);
       glVertex3f(r1 * cos(angle), r1 * sin(angle), -width * 0.5);
    }
@@ -313,16 +313,16 @@ gear(GLfloat inner_radius, GLfloat outer_radius, GLfloat width,
       glVertex3f(r2 * cos(angle + da), r2 * sin(angle + da), -width * 0.5);
       glNormal3f(cos(angle), sin(angle), 0.0);
       glVertex3f(r2 * cos(angle + 2 * da), r2 * sin(angle + 2 * da),
-		 width * 0.5);
+       width * 0.5);
       glVertex3f(r2 * cos(angle + 2 * da), r2 * sin(angle + 2 * da),
-		 -width * 0.5);
+       -width * 0.5);
       u = r1 * cos(angle + 3 * da) - r2 * cos(angle + 2 * da);
       v = r1 * sin(angle + 3 * da) - r2 * sin(angle + 2 * da);
       glNormal3f(v, -u, 0.0);
       glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
-		 width * 0.5);
+       width * 0.5);
       glVertex3f(r1 * cos(angle + 3 * da), r1 * sin(angle + 3 * da),
-		 -width * 0.5);
+       -width * 0.5);
       glNormal3f(cos(angle), sin(angle), 0.0);
    }
 
@@ -437,34 +437,34 @@ init(void)
 
 static void run_gears(EGLDisplay dpy, EGLSurface surf, int ttr)
 {
-	double st = current_time();
-	double ct = st;
-	int frames = 0;
-	GLfloat seconds, fps;
+   double st = current_time();
+   double ct = st;
+   int frames = 0;
+   GLfloat seconds, fps;
 
-	while (ct - st < ttr)
-	{
-		double tt = current_time();
-		double dt = tt - ct;
-		ct = tt;
+   while (ct - st < ttr)
+   {
+      double tt = current_time();
+      double dt = tt - ct;
+      ct = tt;
 
-		/* advance rotation for next frame */
-		angle += 70.0 * dt;  /* 70 degrees per second */
-		if (angle > 3600.0)
-			angle -= 3600.0;
+      /* advance rotation for next frame */
+      angle += 70.0 * dt;  /* 70 degrees per second */
+      if (angle > 3600.0)
+         angle -= 3600.0;
 
-		draw();
+      draw();
 
-		eglSwapBuffers(dpy, surf);
+      eglSwapBuffers(dpy, surf);
 
 
-		frames++;
-	}
+      frames++;
+   }
 
-	seconds = ct - st;
-	fps = frames / seconds;
-	printf("%d frames in %3.1f seconds = %6.3f FPS\n", frames, seconds, fps);
-	fflush(stdout);
+   seconds = ct - st;
+   fps = frames / seconds;
+   printf("%d frames in %3.1f seconds = %6.3f FPS\n", frames, seconds, fps);
+   fflush(stdout);
 
 }
 
@@ -472,101 +472,117 @@ static void run_gears(EGLDisplay dpy, EGLSurface surf, int ttr)
 int
 main(int argc, char *argv[])
 {
-	int major, minor;
-	EGLContext ctx;
-	EGLSurface surface;
-	EGLConfig configs[MAX_CONFIGS];
-	EGLint numConfigs, i;
-	EGLBoolean b;
-	EGLDisplay d;
-	EGLint configAttribs[10];
-	EGLint screenAttribs[10];
-	GLboolean printInfo = GL_FALSE;
-	EGLint width = 300, height = 300;
+   int major, minor;
+   EGLContext ctx;
+   EGLSurface surface;
+   EGLConfig configs[MAX_CONFIGS];
+   EGLint numConfigs, i;
+   EGLBoolean b;
+   EGLDisplay d;
+   EGLint configAttribs[10];
+   EGLint screenAttribs[10];
+   GLboolean printInfo = GL_FALSE;
+   EGLint width = 300, height = 300;
 
         /* parse cmd line args */
-	for (i = 1; i < argc; i++)
-	{
-		if (strcmp(argv[i], "-info") == 0)
-		{
-			printInfo = GL_TRUE;
-		}
-		else
-			printf("Warning: unknown parameter: %s\n", argv[i]);
-	}
+   for (i = 1; i < argc; i++)
+   {
+      if (strcmp(argv[i], "-info") == 0)
+      {
+         printInfo = GL_TRUE;
+      }
+      else
+         printf("Warning: unknown parameter: %s\n", argv[i]);
+   }
 
-	/* DBR : Create EGL context/surface etc */
-	d = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-	assert(d);
+   /* DBR : Create EGL context/surface etc */
+   d = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+   
+   if (EGL_NO_DISPLAY == d) {
+      printf("peglgears: eglGetDisplay returned EGL_NO_DISPLAY\n");
+      return 0;
+   }
 
-	if (!eglInitialize(d, &major, &minor)) {
-		printf("peglgears: eglInitialize failed\n");
-		return 0;
-	}
+   if (!eglInitialize(d, &major, &minor)) {
+      printf("peglgears: eglInitialize failed\n");
+      EGLint error = eglGetError();
+      switch (error) {
+         case EGL_BAD_DISPLAY:
+            fprintf(stderr, "peglgears: generated EGL_NOT_INITIALIZED error (0x%X)\n", error);
+            break;
+         case EGL_NOT_INITIALIZED :
+            fprintf(stderr, "peglgears: generated EGL_NOT_INITIALIZED error (0x%X)\n", error);
+            break;
+         default:
+            fprintf(stderr, "peglgears: generated unknown error: 0x%X\n", error);
+            break;
+      }
+      return 0;
+   }
 
-	printf("peglgears: EGL version = %d.%d\n", major, minor);
-	printf("peglgears: EGL_VENDOR = %s\n", eglQueryString(d, EGL_VENDOR));
+   printf("peglgears: EGL version = %d.%d\n", major, minor);
+   printf("peglgears: EGL_VENDOR = %s\n", eglQueryString(d, EGL_VENDOR));
 
-	i = 0;
-	configAttribs[i++] = EGL_RENDERABLE_TYPE;
-	configAttribs[i++] = EGL_OPENGL_BIT;
-	configAttribs[i++] = EGL_SURFACE_TYPE;
-	configAttribs[i++] = EGL_PBUFFER_BIT;
-	configAttribs[i++] = EGL_NONE;
+   i = 0;
+   configAttribs[i++] = EGL_RENDERABLE_TYPE;
+   configAttribs[i++] = EGL_OPENGL_BIT;
+   configAttribs[i++] = EGL_SURFACE_TYPE;
+   configAttribs[i++] = EGL_PBUFFER_BIT;
+   configAttribs[i++] = EGL_NONE;
 
-	numConfigs = 0;
-	if (!eglChooseConfig(d, configAttribs, configs, MAX_CONFIGS, &numConfigs) ||
-	    !numConfigs) {
-		printf("peglgears: failed to choose a config\n");
-		return 0;
-	}
+   numConfigs = 0;
+   if (!eglChooseConfig(d, configAttribs, configs, MAX_CONFIGS, &numConfigs) ||
+       !numConfigs) {
+      printf("peglgears: failed to choose a config\n");
+      return 0;
+   }
 
-	eglBindAPI(EGL_OPENGL_API);
+   eglBindAPI(EGL_OPENGL_API);
 
-	ctx = eglCreateContext(d, configs[0], EGL_NO_CONTEXT, NULL);
-	if (ctx == EGL_NO_CONTEXT) {
-		printf("peglgears: failed to create context\n");
-		return 0;
-	}
+   ctx = eglCreateContext(d, configs[0], EGL_NO_CONTEXT, NULL);
+   if (ctx == EGL_NO_CONTEXT) {
+      printf("peglgears: failed to create context\n");
+      return 0;
+   }
 
-	/* build up screenAttribs array */
-	i = 0;
-	screenAttribs[i++] = EGL_WIDTH;
-	screenAttribs[i++] = width;
-	screenAttribs[i++] = EGL_HEIGHT;
-	screenAttribs[i++] = height;
-	screenAttribs[i++] = EGL_NONE;
+   /* build up screenAttribs array */
+   i = 0;
+   screenAttribs[i++] = EGL_WIDTH;
+   screenAttribs[i++] = width;
+   screenAttribs[i++] = EGL_HEIGHT;
+   screenAttribs[i++] = height;
+   screenAttribs[i++] = EGL_NONE;
 
-	surface = eglCreatePbufferSurface(d, configs[0], screenAttribs);
-	if (surface == EGL_NO_SURFACE) {
-		printf("peglgears: failed to create pbuffer surface\n");
-		return 0;
-	}
+   surface = eglCreatePbufferSurface(d, configs[0], screenAttribs);
+   if (surface == EGL_NO_SURFACE) {
+      printf("peglgears: failed to create pbuffer surface\n");
+      return 0;
+   }
 
-	b = eglMakeCurrent(d, surface, surface, ctx);
-	if (!b) {
-		printf("peglgears: make current failed\n");
-		return 0;
-	}
+   b = eglMakeCurrent(d, surface, surface, ctx);
+   if (!b) {
+      printf("peglgears: make current failed\n");
+      return 0;
+   }
 
-	if (printInfo)
-	{
-		printf("GL_RENDERER   = %s\n", (char *) glGetString(GL_RENDERER));
-		printf("GL_VERSION    = %s\n", (char *) glGetString(GL_VERSION));
-		printf("GL_VENDOR     = %s\n", (char *) glGetString(GL_VENDOR));
-		printf("GL_EXTENSIONS = %s\n", (char *) glGetString(GL_EXTENSIONS));
-	}
+   if (printInfo)
+   {
+      printf("GL_RENDERER   = %s\n", (char *) glGetString(GL_RENDERER));
+      printf("GL_VERSION    = %s\n", (char *) glGetString(GL_VERSION));
+      printf("GL_VENDOR     = %s\n", (char *) glGetString(GL_VENDOR));
+      printf("GL_EXTENSIONS = %s\n", (char *) glGetString(GL_EXTENSIONS));
+   }
 
-	init();
-	reshape(width, height);
+   init();
+   reshape(width, height);
 
-	glDrawBuffer( GL_BACK );
+   glDrawBuffer( GL_BACK );
 
-	run_gears(d, surface, 5.0);
+   run_gears(d, surface, 5.0);
 
-	eglDestroySurface(d, surface);
-	eglDestroyContext(d, ctx);
-	eglTerminate(d);
+   eglDestroySurface(d, surface);
+   eglDestroyContext(d, ctx);
+   eglTerminate(d);
 
-	return 0;
+   return 0;
 }
