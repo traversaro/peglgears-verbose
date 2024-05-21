@@ -508,7 +508,7 @@ main(int argc, char *argv[])
       EGLint error = eglGetError();
       switch (error) {
          case EGL_BAD_DISPLAY:
-            fprintf(stderr, "peglgears: generated EGL_NOT_INITIALIZED error (0x%X)\n", error);
+            fprintf(stderr, "peglgears: generated EGL_BAD_DISPLAY error (0x%X)\n", error);
             break;
          case EGL_NOT_INITIALIZED :
             fprintf(stderr, "peglgears: generated EGL_NOT_INITIALIZED error (0x%X)\n", error);
